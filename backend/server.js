@@ -1,5 +1,4 @@
 import cloudinary from "cloudinary";
-import { graphqlHTTP } from 'express-graphql';
 import { ApolloServer } from 'apollo-server-express';
 import app from "./app.js";
 import combinedSchema from "./graphql/index.js";
@@ -13,18 +12,12 @@ cloudinary.v2.config({
     api_secret: process.env.CLOUDINARY_CLIENT_SECRET,
 });
 
+// Set up the GraphQL endpoint
 const server = new ApolloServer({ typeDefs, resolvers });
 // Start the server
 await server.start();
 server.applyMiddleware({ app });
-// Set up the GraphQL endpoint
-// app.use(
-//   '/graphql',
-//   graphqlHTTP({
-//     schema: combinedSchema,
-//     graphiql: true, // Enable GraphiQL UI for testing queries
-//   })
-// );
+
 
 // Start the server
 app.listen(PORT, () => {
