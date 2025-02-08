@@ -34,6 +34,7 @@ const typeDefs = gql`
     getUsers: [User]
     getAvailableFilter(id: ID!): AvailableFilter
     getAvailableFilters: [AvailableFilter]
+    getAgency(id: ID!): Agency
     getAgencies: [Agency]
   }
 

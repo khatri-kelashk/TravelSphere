@@ -10,18 +10,18 @@ const availableFilterResolver = {
     },  
   },
   Mutation: {
-    createAvailableFilter: async ({ name, value }) => {
+    createAvailableFilter: async (_, { name, value }) => {
       const availableFilter = new AvailableFilter({ name, value });
       return await availableFilter.save();
     },
-    updateAvailableFilter: async ({ id, name, value }) => {
+    updateAvailableFilter: async (_, { id, name, value }) => {
       return await AvailableFilter.findByIdAndUpdate(
         id,
-        { name, value },
+        { name, value, updatedAt: new Date() },
         { new: true } // Return the updated document
       );
     },
-    deleteAvailableFilter: async ({ id }) => {
+    deleteAvailableFilter: async (_, { id }) => {
       await AvailableFilter.findByIdAndDelete(id);
       return 'Available Filter deleted successfully';
     },  

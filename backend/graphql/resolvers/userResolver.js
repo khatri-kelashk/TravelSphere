@@ -10,18 +10,18 @@ const userResolver = {
     },
   },
   Mutation: {
-    createUser: async ({ user_name, email, phone_no, password, role }) => {
+    createUser: async (_, { user_name, email, phone_no, password, role }) => {
       const user = new User({ user_name, email, phone_no, password, role });
       return await user.save();
     },
-    updateUser: async ({ id, user_name, email, phone_no, password, role }) => {
+    updateUser: async (_, { id, user_name, email, phone_no, password, role }) => {
       return await User.findByIdAndUpdate(
         id,
-        { user_name, email, phone_no, password, role },
+        { user_name, email, phone_no, password, role, updatedAt: new Date() },
         { new: true } // Return the updated document
       );
     },
-    deleteUser: async ({ id }) => {
+    deleteUser: async (_, { id }) => {
       await User.findByIdAndDelete(id);
       return 'User deleted successfully';
     },
