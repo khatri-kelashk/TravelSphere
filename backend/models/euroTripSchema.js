@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const agencySchema = new mongoose.Schema({
+const euroTripSchema = new mongoose.Schema({
     _tracking: {
       type: "bool",
       default: false,  
@@ -15,6 +15,10 @@ const agencySchema = new mongoose.Schema({
         minLength: [3, "Min 3 chars "],
         maxLength: [30, "Max 30 chars"],
     },
+    no_of_days: {
+        type: "number",
+        default: 0,
+    },
     country_id: {
         type: mongoose.Schema.Types.ObjectId,
         required: false,
@@ -26,10 +30,6 @@ const agencySchema = new mongoose.Schema({
     agency_id: {
         type: mongoose.Schema.Types.ObjectId,
         required: false,
-    },
-    no_of_days: {
-        type: "number",
-        default: 0,
     },
     image_id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -57,4 +57,4 @@ const agencySchema = new mongoose.Schema({
     }
 });
 
-export const Agency = mongoose.model("Agency", agencySchema);
+export const EuroTrip = mongoose.model("EuroTrips", euroTripSchema);

@@ -1,9 +1,10 @@
 import cloudinary from "cloudinary";
 import { ApolloServer } from 'apollo-server-express';
 import app from "./app.js";
-import combinedSchema from "./graphql/index.js";
-import typeDefs from './graphql/schemas/schema.js';
-import resolvers from './graphql/resolvers/resolvers.js';
+import typeDefs from './graphql/schemas/index.js';
+import resolvers from './graphql/resolvers/index.js';
+import importData from "./models/otherScripts.js";
+
 const PORT = process.env.PORT || 5000;
 
 cloudinary.v2.config({
@@ -22,4 +23,5 @@ server.applyMiddleware({ app });
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}/graphql`);
+  // importData();
 });

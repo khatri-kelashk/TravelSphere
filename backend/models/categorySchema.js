@@ -17,7 +17,8 @@ const categorySchema = new mongoose.Schema({
     },
     category_type: {
         type: mongoose.Schema.Types.ObjectId,
-        required: false,
+        required: true,
+        ref: "CategoryType"
     },
     is_parent: {
         type: "bool",
@@ -26,6 +27,7 @@ const categorySchema = new mongoose.Schema({
     parent_id: {
         type: mongoose.Schema.Types.ObjectId,
         required: false,
+        ref: "Category"
     },
     createdAt: {
         type: Date,

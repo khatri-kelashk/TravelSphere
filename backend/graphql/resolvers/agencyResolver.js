@@ -10,14 +10,14 @@ const agencyResolver = {
     },
   },
   Mutation: {
-    createAgency: async (_, { name, location, phone_no, working_hours, desc_short, desc_long, logo_id }) => {
-      const agency = new Agency({ name, location, phone_no, working_hours, desc_short, desc_long, logo_id });
-      return await Agency.save();
+    createAgency: async (_, { name, location, phone_no, working_hours, desc_short, desc_long, logo_id, _tracking, search_counter }) => {
+      const agency = new Agency({ name, location, phone_no, working_hours, desc_short, desc_long, logo_id, _tracking, search_counter });
+      return await agency.save();
     },
-    updateAgency: async (_, { id, name, location, phone_no, working_hours, desc_short, desc_long, logo_id  }) => {
+    updateAgency: async (_, { id, name, location, phone_no, working_hours, desc_short, desc_long, logo_id, _tracking, search_counter  }) => {
       return await Agency.findByIdAndUpdate(
         id,
-        { name, location, phone_no, working_hours, desc_short, desc_long, logo_id, updatedAt: new Date() },
+        { name, location, phone_no, working_hours, desc_short, desc_long, logo_id, _tracking, search_counter, updatedAt: new Date() },
         { new: true } // Return the updated document
       );
     },
