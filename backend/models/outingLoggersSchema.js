@@ -19,7 +19,7 @@ const outingLoggersSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    LoginAt: {
+    loginAt: {
         type: Date,
         default: Date.now,
     },
