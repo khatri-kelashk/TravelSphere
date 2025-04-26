@@ -54,6 +54,12 @@ const typeDefs = gql`
     id: ID!
     name: String!
   }
+  
+  type HeartbeatResponse {
+    success: Boolean!
+    message: String!
+    error: String
+  }
 
   type User {
     id: ID!
@@ -105,6 +111,9 @@ const typeDefs = gql`
     createModule(name: String!): Module
     updateModule(id: ID!, name: String!): Module
     deleteModule(id: ID!): String
+
+    heartbeat(id: ID!, user_id: ID!): HeartbeatResponse!
+
 
     createUser(user_name: String!, email: String!, password: String!, phone_no: String, role: String): User
     updateUser(id: ID!, user_name: String, email: String, password: String, phone_no: String, role: String): User
