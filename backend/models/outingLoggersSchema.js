@@ -19,14 +19,18 @@ const outingLoggersSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    loginAt: {
+    login_at: {
         type: Date,
         default: Date.now,
     },
-    logoutAt: {
+    logout_at: {
         type: Date,
         default: Date.now,
-    }
+    },
+    session_expired_at: {
+        type: Date,
+        default: null,
+    },
 });
 
 export const OutingLoggers = mongoose.model("OutingLoggers", outingLoggersSchema);
