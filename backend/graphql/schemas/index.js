@@ -55,6 +55,12 @@ const typeDefs = gql`
     name: String!
   }
   
+  type GenericResponse {
+    success: Boolean!
+    message: String!
+    error: String
+  }
+  
   type HeartbeatResponse {
     success: Boolean!
     message: String!
@@ -113,6 +119,8 @@ const typeDefs = gql`
     deleteModule(id: ID!): String
 
     heartbeat(id: ID!, user_id: ID!): HeartbeatResponse!
+
+    updateSearchCounter(id: ID!): GenericResponse!
 
 
     createUser(user_name: String!, email: String!, password: String!, phone_no: String, role: String): User

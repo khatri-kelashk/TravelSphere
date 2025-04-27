@@ -4,6 +4,8 @@ import CategoryResolver from './categoryResolver.js';
 import CategoryTypeResolver from './categoryTypeResolver.js';
 import EuroTripResolver from './euroTripResolver.js';
 import ModuleResolver from './moduleResolver.js';
+import OutingLoggerResolver from './outingLoggerResolver.js';
+import residenceResolver from './residenceResolver.js';
 import UserResolver from "./userResolver.js";
 
 const resolvers = {
@@ -14,6 +16,8 @@ const resolvers = {
       ...CategoryTypeResolver.Query,
       ...EuroTripResolver.Query,
       ...ModuleResolver.Query,
+      ...OutingLoggerResolver.Query,
+      ...residenceResolver.Query,
       ...UserResolver.Query,
   },
   
@@ -24,6 +28,8 @@ const resolvers = {
       ...CategoryTypeResolver.Mutation,
       ...EuroTripResolver.Mutation,
       ...ModuleResolver.Mutation,
+      ...OutingLoggerResolver.Mutation,
+      ...residenceResolver.Mutation,
       ...UserResolver.Mutation,
   },
 };
