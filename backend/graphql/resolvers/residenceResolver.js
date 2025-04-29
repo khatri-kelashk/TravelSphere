@@ -36,7 +36,7 @@ const residenceResolver = {
             if (!result) {
               return {
                 success: false,
-                message: 'Residence not found',
+                message: 'Residence not found for Counter analytics!',
                 error: 'Invalid ID'
               };
             }
