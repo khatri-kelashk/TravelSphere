@@ -29,7 +29,7 @@ const residenceResolver = {
         try {
             const result = await Residences.findByIdAndUpdate(
               id,
-              { $inc: { search_counter: 1 } },
+              { $inc: { search_counter : 1 } },
               { new: true }
             );
       
