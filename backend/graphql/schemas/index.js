@@ -54,6 +54,14 @@ const typeDefs = gql`
     id: ID!
     name: String!
   }
+
+  type OutingLogger {
+    user_name: String!
+    user_id: ID
+    login_at: Date
+    logout_at: Date
+    session_expired_at:: Date | Null
+  }
   
   type GenericResponse {
     success: Boolean!
@@ -89,6 +97,8 @@ const typeDefs = gql`
     getEuroTrips: [EuroTrip]
     getModule(id: ID!): Module
     getModules: [Module]
+    getOutingLogger: OutingLogger
+    getOutingLoggers: [OutingLogger]
     getUser(id: ID!): User
     getUsers: [User]
   }
@@ -118,6 +128,7 @@ const typeDefs = gql`
     updateModule(id: ID!, name: String!): Module
     deleteModule(id: ID!): String
 
+    updateOutingLogger(id: ID!, name: String!): OutingLogger
     heartbeat(id: ID!, user_id: ID!): HeartbeatResponse!
 
     updateSearchCounter(id: ID!): GenericResponse!
