@@ -10,7 +10,7 @@ const residenceResolver = {
     },
   },
   Mutation: {
-    createResidence: async (_, { name, country_id, _tracking, region_id, resd_type_id,agency_id,desc_short, desc_long, filters }) => {
+    createResidence: async (_, { name, country_id, region_id, resd_type_id,agency_id,desc_short, desc_long, _tracking, filters }) => {
       const record = new Residences({ name, country_id, _tracking, region_id, resd_type_id,agency_id,desc_short, desc_long });
       return await record.save();
     },
