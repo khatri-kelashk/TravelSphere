@@ -148,11 +148,9 @@ const typeDefs = gql`
 
     updateSearchCounter(id: ID!): GenericResponse!
 
-    createResidence(name: String!,country_id: ID, transportation_type_id: ID, agency_id: ID, image_id: ID, price_image_id: ID, no_of_days:Int , desc_short: String, desc_long: String, _tracking: Boolean, search_counter: Int): Residence
-    updateResidence(id: ID!, name: String!,country_id: ID, transportation_type_id: ID, agency_id: ID, image_id: ID, price_image_id: ID, no_of_days:Int , desc_short: String, desc_long: String, _tracking: Boolean, search_counter: Int): Residence
+    createResidence(name: String!,country_id: ID, region_id: ID, resd_type_id: ID, agency_id: ID, resd_image_id: ID, price_image_id: ID, desc_short: String, desc_long: String, _tracking: Boolean, search_counter: Int): Residence
+    updateResidence(id: ID!, name: String!,country_id: ID, region_id: ID, resd_type_id: ID, agency_id: ID, resd_image_id: ID, price_image_id: ID, desc_short: String, desc_long: String, _tracking: Boolean, search_counter: Int): Residence
     deleteResidence(id: ID!): String
-
-
 
     createUser(user_name: String!, email: String!, password: String!, phone_no: String, role: String): User
     updateUser(id: ID!, user_name: String, email: String, password: String, phone_no: String, role: String): User
