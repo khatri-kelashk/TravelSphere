@@ -12,6 +12,10 @@ const residenceFilterSchema = new mongoose.Schema({
         required: [false, "Please input value"],
         default: "0"
     },
+    ablFilterId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
     resd_id: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
