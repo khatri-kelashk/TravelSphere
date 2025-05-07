@@ -1,4 +1,4 @@
-import { Residences } from '../../models/residencesSchema'; // Import the Mongoose model
+import { Residences } from '../../models/residencesSchema.js'; // Import the Mongoose model
 
 const residenceResolver = {
   Query: {
