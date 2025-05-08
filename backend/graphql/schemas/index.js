@@ -90,6 +90,14 @@ const typeDefs = gql`
     error: String
   }
 
+  type ResidenceFilter {
+    id: ID!
+    name: String
+    value: String
+    ablFilterId: ID!
+    resd_id: ID!
+  }
+
   type User {
     id: ID!
     user_name: String!
@@ -114,6 +122,8 @@ const typeDefs = gql`
     getModules: [Module]
     getOutingLogger: OutingLogger
     getOutingLoggers: [OutingLogger]
+    getResidenceFilter(id: ID!): ResidenceFilter
+    getResidenceFilters: [ResidenceFilter]
     getUser(id: ID!): User
     getUsers: [User]
   }
@@ -151,6 +161,10 @@ const typeDefs = gql`
     createResidence(name: String!,country_id: ID, region_id: ID, resd_type_id: ID, agency_id: ID, resd_image_id: ID, price_image_id: ID, desc_short: String, desc_long: String, _tracking: Boolean, search_counter: Int): Residence
     updateResidence(id: ID!, name: String!,country_id: ID, region_id: ID, resd_type_id: ID, agency_id: ID, resd_image_id: ID, price_image_id: ID, desc_short: String, desc_long: String, _tracking: Boolean, search_counter: Int): Residence
     deleteResidence(id: ID!): String
+
+    createResidenceFilter(ablFilterId: ID!, resd_id: ID!): ResidenceFilter
+    updateResidenceFilter(id: ID!, ablFilterId: ID!, resd_id: ID!): ResidenceFilter
+    deleteResidenceFilter(id: ID!): String
 
     createUser(user_name: String!, email: String!, password: String!, phone_no: String, role: String): User
     updateUser(id: ID!, user_name: String, email: String, password: String, phone_no: String, role: String): User
