@@ -47,6 +47,10 @@ const euroTripSchema = new mongoose.Schema({
         type: "string",
         required: [false, "Please input long Description"]
     },
+    isDeleted: { 
+        type: Boolean, 
+        default: false 
+    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -57,4 +61,14 @@ const euroTripSchema = new mongoose.Schema({
     }
 });
 
+euroTripSchema.pre('find', function() {
+  this.where({ isDeleted: false });
+});
+
 export const EuroTrip = mongoose.model("EuroTrips", euroTripSchema);
+
+// Soft delete method
+EuroTrip.prototype.softDelete = function() {
+  this.isDeleted = true;
+  return this.save();
+};

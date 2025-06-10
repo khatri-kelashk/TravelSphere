@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
         enum: ["User", "Admin"],
         default: "User"
     },
+    isDeleted: { 
+        type: Boolean, 
+        default: false 
+    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -49,6 +53,10 @@ userSchema.pre("save", async function(next){
     this.password = await bcrypt.hash(this.password, 10);
 });
 
+userSchema.pre('find', function() {
+  this.where({ isDeleted: false });
+});
+
 userSchema.methods.comparePassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 }
@@ -61,3 +69,9 @@ userSchema.methods.getJWTToken = async function(){
 }
 
 export const User = mongoose.model("User", userSchema);
+
+// Soft delete method
+User.prototype.softDelete = function() {
+  this.isDeleted = true;
+  return this.save();
+};

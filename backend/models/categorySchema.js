@@ -29,6 +29,10 @@ const categorySchema = new mongoose.Schema({
         required: false,
         ref: "Category"
     },
+    isDeleted: { 
+        type: Boolean, 
+        default: false 
+    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -39,4 +43,14 @@ const categorySchema = new mongoose.Schema({
     }
 });
 
+categorySchema.pre('find', function() {
+  this.where({ isDeleted: false });
+});
+
 export const Category = mongoose.model("Category", categorySchema);
+
+// Soft delete method
+Category.prototype.softDelete = function() {
+  this.isDeleted = true;
+  return this.save();
+};

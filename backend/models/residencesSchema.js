@@ -47,6 +47,10 @@ const residencesSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: false,
     },
+    isDeleted: { 
+        type: Boolean, 
+        default: false 
+    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -57,4 +61,14 @@ const residencesSchema = new mongoose.Schema({
     }
 });
 
+residencesSchema.pre('find', function() {
+  this.where({ isDeleted: false });
+});
+
 export const Residences = mongoose.model("Residences", residencesSchema);
+
+// Soft delete method
+Residences.prototype.softDelete = function() {
+  this.isDeleted = true;
+  return this.save();
+};

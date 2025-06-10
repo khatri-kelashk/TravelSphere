@@ -39,6 +39,10 @@ const agencySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: false,
     },
+    isDeleted: { 
+        type: Boolean, 
+        default: false 
+    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -49,4 +53,14 @@ const agencySchema = new mongoose.Schema({
     }
 });
 
+agencySchema.pre('find', function() {
+  this.where({ isDeleted: false });
+});
+
 export const Agency = mongoose.model("Agency", agencySchema);
+
+// Soft delete method
+Agency.prototype.softDelete = function() {
+  this.isDeleted = true;
+  return this.save();
+};
