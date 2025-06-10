@@ -15,6 +15,10 @@ const moduleScreensSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: [true, "Please input screen_id"],
     },
+    isDeleted: { 
+        type: Boolean, 
+        default: false 
+    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -25,4 +29,14 @@ const moduleScreensSchema = new mongoose.Schema({
     }
 });
 
+moduleScreensSchema.pre('find', function() {
+  this.where({ isDeleted: false });
+});
+
 export const ModuleScreens = mongoose.model("ModuleScreens", moduleScreensSchema);
+
+// Soft delete method
+ModuleScreens.prototype.softDelete = function() {
+  this.isDeleted = true;
+  return this.save();
+};

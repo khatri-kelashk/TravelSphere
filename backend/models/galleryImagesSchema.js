@@ -23,6 +23,10 @@ const galleryImagesSchema = new mongoose.Schema({
       type: "bool",
       default: false,  
     },
+    isDeleted: { 
+        type: Boolean, 
+        default: false 
+    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -33,4 +37,14 @@ const galleryImagesSchema = new mongoose.Schema({
     }
 });
 
+galleryImagesSchema.pre('find', function() {
+  this.where({ isDeleted: false });
+});
+
 export const GalleryImages = mongoose.model("GalleryImages", galleryImagesSchema);
+
+// Soft delete method
+GalleryImages.prototype.softDelete = function() {
+  this.isDeleted = true;
+  return this.save();
+};

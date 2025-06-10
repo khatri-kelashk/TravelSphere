@@ -27,6 +27,10 @@ const imagesSchema = new mongoose.Schema({
         type: "string",
         required: [false, "Please input image URL"],
     },
+    isDeleted: { 
+        type: Boolean, 
+        default: false 
+    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -37,4 +41,14 @@ const imagesSchema = new mongoose.Schema({
     }
 });
 
+imagesSchema.pre('find', function() {
+  this.where({ isDeleted: false });
+});
+
 export const Images = mongoose.model("Images", imagesSchema);
+
+// Soft delete method
+Images.prototype.softDelete = function() {
+  this.isDeleted = true;
+  return this.save();
+};

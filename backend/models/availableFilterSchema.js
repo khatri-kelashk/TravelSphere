@@ -12,6 +12,10 @@ const availableFilterSchema = new mongoose.Schema({
         required: [false, "Please input value"],
         default: "0"
     },
+    isDeleted: { 
+        type: Boolean, 
+        default: false 
+    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -22,4 +26,14 @@ const availableFilterSchema = new mongoose.Schema({
     }
 });
 
+availableFilterSchema.pre('find', function() {
+  this.where({ isDeleted: false });
+});
+
 export const AvailableFilter = mongoose.model("AvailableFilter", availableFilterSchema);
+
+// Soft delete method
+AvailableFilter.prototype.softDelete = function() {
+  this.isDeleted = true;
+  return this.save();
+};

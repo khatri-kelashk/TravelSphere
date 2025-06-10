@@ -11,6 +11,10 @@ const modulesSchema = new mongoose.Schema({
         type: "string",
         required: [false, "Please input Description"]
     },
+    isDeleted: { 
+        type: Boolean, 
+        default: false 
+    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -21,4 +25,14 @@ const modulesSchema = new mongoose.Schema({
     }
 });
 
+modulesSchema.pre('find', function() {
+  this.where({ isDeleted: false });
+});
+
 export const Modules = mongoose.model("Modules", modulesSchema);
+
+// Soft delete method
+Modules.prototype.softDelete = function() {
+  this.isDeleted = true;
+  return this.save();
+};
